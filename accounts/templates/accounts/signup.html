@@ -8,6 +8,18 @@
 {% endif %}
 <form method="POST" action="{% url 'signup' %}">
     {% csrf_token %}
+    First Name:
+    <br/>
+    <input type="text" name="firstname"/>
+    <br/>
+    Last name:
+    <br/>
+    <input type="text" name="lastname"/>
+    <br/>
+    Email Address:
+    <br/>
+    <input type="text" name="email"/>
+    <br/>
     Username:
     <br/>
     <input type="text" name="username"/>
@@ -19,6 +31,14 @@
     Confirm Password:
     <br/>
     <input type="password" name="password2"/>
+    <br/>
+    Address:
+    <br/>
+    <input type="text" name="address"/>
+    <br/>
+    Contact No:
+    <br/>
+    <input type="text" name="contact_no"/>
     <br/>
     <br/>
     <input class="btn btn-primary" type="submit" value="Signup"/>
