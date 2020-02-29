@@ -1,47 +1,19 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
-<h1>Signup!</h1>
-{% if error %}
-{{ error }}
-<br/>
-<br/>
-{% endif %}
-<form method="POST" action="{% url 'signup' %}">
-    {% csrf_token %}
-    First Name:
-    <br/>
-    <input type="text" name="firstname"/>
-    <br/>
-    Last name:
-    <br/>
-    <input type="text" name="lastname"/>
-    <br/>
-    Email Address:
-    <br/>
-    <input type="text" name="email"/>
-    <br/>
-    Username:
-    <br/>
-    <input type="text" name="username"/>
-    <br/>
-    Password:
-    <br/>
-    <input type="password" name="password1"/>
-    <br/>
-    Confirm Password:
-    <br/>
-    <input type="password" name="password2"/>
-    <br/>
-    Address:
-    <br/>
-    <input type="text" name="address"/>
-    <br/>
-    Contact No:
-    <br/>
-    <input type="text" name="contact_no"/>
-    <br/>
-    <br/>
-    <input class="btn btn-primary" type="submit" value="Signup"/>
-</form>
-
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">Already Have An Account?<a href="{% url 'login' %}">Sign In</a></small>
+        </div>
+    </div>
 {% endblock %}
