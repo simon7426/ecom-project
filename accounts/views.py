@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.db import models
-from .forms import usersignup
+from .forms import usersignup,userupdate,profileupdate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -22,4 +22,20 @@ def signup(request):
 
 @login_required
 def profile(request):
-    return render(request,'accounts/profile.html')
+    if(request.method=='POST'):
+        u_form = userupdate(request.POST,instance = request.user)
+        p_form = profileupdate(request.POST,request.FILES,instance = request.user.profile)
+        if(u_form.is_valid() and p_form.is_valid()):
+            u_form.save()
+            p_form.save()
+            messages.success(request,f'Your account has been Updated')
+            return redirect('profile')
+    else:
+        u_form = userupdate(instance = request.user)
+        p_form = profileupdate(instance = request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request,'accounts/profile.html',context)
