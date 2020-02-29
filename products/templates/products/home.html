@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Products to  be Added</h2>
+<div class="text-center">
+    <h1>Join Today</h1>
+</div>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            {% for product in products.all %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top" src={{ product.image.url }} height="200px" width="200px"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="price-wrap h5">
+                            <span class="price-new">${{ product.price }} </span>
+                        </div>
+                        <div class="text-italic">
+                            <p class="card-text">Added By: {{ product.owner }}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <small class="text-muted">{{ product.date_posted.date }}  </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}
