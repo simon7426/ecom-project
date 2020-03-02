@@ -65,6 +65,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav ml-auto">
                         {% if user.is_authenticated %}
+                        <a class="btn btn-dark" href="{% url 'product-create' %}" role="button">Sell Item</a>
                         <a class="nav-item nav-link" href="{% url 'profile' %}">{{ user.username }}</a>
                         <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                         {% else %}

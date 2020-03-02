@@ -1,29 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="text-center">
-    <h1>Join Today</h1>
-</div>
+<h2 class="text-center">Item Details</h2>
 <div class="album py-5 bg-light">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                    <img class="card-img-top" src={{ object.image.url }} height="200px" width="200px"/>
-                    <div class="card-body">
-                        <h5 class="card-title">{{ object.name }}</h5>
-                        <div class="price-wrap h5">
-                            <span class="price-new">${{ object.price }} </span>
-                        </div>
-                        <div class="text-italic">
-                            <p class="card-text">Added By: {{ object.owner }}</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <small class="text-muted">{{ object.date_posted.date }}  </small>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="card mb-3 w-100">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src={{ object.image.url }} class="card-img">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ object.name }}</h5>
+              <div class="price-wrap h5">
+                <span class="price-new">${{ object.price }} </span>
+              </div>
+              <div>
+                <p class="card-text font-weight-bold font-italic">Added By: {{ object.owner }}</p>
+              </div>
+              <p class="card-text">{{ object.description }}</p>
+              <p class="card-text"><small class="text-muted">{{ object.date_posted.date }}</small></p>
+              {% if object.owner == user %}
+              <div class="text-right">
+                <a class="btn btn-light mt-1 mb-1" href="{% url 'product-update' object.id %}" role="button">Update</a>
+                <a class="btn btn-light mt-1 mb-1" href="{% url 'product-delete' object.id %}" role="button">Delete</a>
+              </div>
+              {% endif %}
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
