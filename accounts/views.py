@@ -18,7 +18,7 @@ def signup(request):
 
     else:
         form = usersignup()
-    return render(request,'accounts/signup.html',{'form':form})
+    return render(request,'accounts/signup.html',{'form':form,'title':"Signup"})
 
 @login_required
 def profile(request):
@@ -36,6 +36,7 @@ def profile(request):
 
     context = {
         'u_form': u_form,
-        'p_form': p_form
+        'p_form': p_form,
+        'title':"Profile"
     }
     return render(request,'accounts/profile.html',context)

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
+from django.urls import reverse
 
 # Create your models here.
 class Product(models.Model):
@@ -19,3 +20,6 @@ class Product(models.Model):
             output_size = (300,300)
             img.thumbnail(output_size)
             img.save(self.image.path)
+
+    def get_absolute_url(self):
+        return reverse('product-detail', kwargs={'pk':self.pk})
