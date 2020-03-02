@@ -22,6 +22,13 @@ def signup(request):
 
 @login_required
 def profile(request):
+    context = {
+        'title':"Profile"
+    }
+    return render(request,'accounts/profile.html',context)
+
+@login_required
+def update(request):
     if(request.method=='POST'):
         u_form = userupdate(request.POST,instance = request.user)
         p_form = profileupdate(request.POST,request.FILES,instance = request.user.profile)
@@ -37,6 +44,7 @@ def profile(request):
     context = {
         'u_form': u_form,
         'p_form': p_form,
-        'title':"Profile"
+        'title':"Update Profile"
     }
-    return render(request,'accounts/profile.html',context)
+    return render(request,'accounts/update.html',context)
+

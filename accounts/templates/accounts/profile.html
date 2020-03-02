@@ -14,35 +14,28 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
                             <div class="text-secondary">
-                                <h2>@{{ user.username }}</h2>
+                                <h5>@{{ user.username }}</h5>
                             </div>
                             <div>
-                                <p class="card-text font-weight-bold">Email: {{ user.email }}</p>
+                                <text class="font-weight-bold">Email: </text>
+                                <text class="font-weight-normal text-lowercase">{{ user.email }}</text>
                             </div>
                             <div>
-                                <p class="card-text">Address: {{ user.address }}</p>
+                                <text class="font-weight-bold">Address: </text>
+                                <text class="font-weight-normal text-uppercase">{{ user.profile.address }}</text>
                             </div>
                             <div>
-                                <p class="card-text font-italic">Contact No: {{ user.contact_no }}</p>
+                                <text class="font-weight-bold">Contact No: </text>
+                                <text class="font-weight-normal text-lowercase">{{ user.profile.contact_no }}</text>
                             </div>
+                            <div class="text-right">
+                            <a class="btn btn-light mt-1 mb-1" href="{% url 'update' %}" role="button">Update</a>
+                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <br>
-        <br>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Profile Info</legend>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Update</button>
-            </div>
-        </form>
     </div>
 </div>
 {% endblock %}
