@@ -6,6 +6,7 @@ from django.db import models
 from .forms import usersignup,userupdate,profileupdate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from products.models import Product
 
 def signup(request):
     if(request.method=="POST"):
@@ -22,8 +23,10 @@ def signup(request):
 
 @login_required
 def profile(request):
+    product = Product.objects.filter(owner=request.user)
     context = {
-        'title':"Profile"
+        'title':"Profile",
+        'products': product
     }
     return render(request,'accounts/profile.html',context)
 

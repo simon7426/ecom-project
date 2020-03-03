@@ -14,5 +14,5 @@ class Profile(models.Model):
         img = Image.open(self.profile_picture.path)
         if(img.height > 300 or img.width>300):
             output_size = (300,300)
-            img.thumbnail(output_size)
+            img.thumbnail(output_size,Image.ANTIALIAS)
             img.save(self.profile_picture.path)
