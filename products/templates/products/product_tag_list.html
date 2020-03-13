@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="text-center">
-    <h2>Marketplace Home</h2>
+    <h2>Products tagged: #{{ tag }}</h2>
 </div>
 <div class="album py-5 bg-light">
     <div class="container">
@@ -15,7 +15,7 @@
                         <div class="price-wrap h5">
                             <span class="price-new">Tk. {{ product.price }} </span>
                         </div>
-                        <div class="text-italic">
+                        <div class="font-italic">
                             <p class="card-text">Added By: {{ product.owner }}</p>
                         </div>
                         <div>

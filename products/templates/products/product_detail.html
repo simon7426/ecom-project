@@ -18,6 +18,14 @@
               <div>
                 <p class="card-text font-weight-bold font-italic">Added By: {{ object.owner }}</p>
               </div>
+              <div>
+                <p class="card-text">
+                    Tags: 
+                    {% for tag in object.tags.all %}
+                    <a href="{% url 'product-tag-list' tag.slug %}">#{{ tag }}</a> 
+                    {% endfor %}
+                </p>
+            </div>
               <p class="card-text">{{ object.description }}</p>
               <p class="card-text"><small class="text-muted">{{ object.date_posted.date }}</small></p>
               {% if object.owner == user %}

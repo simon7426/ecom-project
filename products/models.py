@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from PIL import Image
 from django.urls import reverse
 
+from taggit.managers import TaggableManager
+
 # Create your models here.
 class Product(models.Model):
     name = models.CharField(max_length = 100)
@@ -12,7 +14,7 @@ class Product(models.Model):
     date_posted = models.DateTimeField(default = timezone.now)
     price = models.DecimalField(max_digits = 8,decimal_places = 2)
     owner = models.ForeignKey(User, on_delete = models.CASCADE)
-    
+    tags = TaggableManager()
     def save(self,*args,**kwargs):
         super(Product,self).save(*args,**kwargs)
         img = Image.open(self.image.path)
