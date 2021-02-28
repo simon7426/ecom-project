@@ -51,3 +51,13 @@ def update(request):
     }
     return render(request,'accounts/update.html',context)
 
+@login_required
+def cart(request):
+    return render(request,'accounts/cart.html')
+
+@login_required
+def checkout(request):
+    return render(request,'accounts/checkout.html')
+
+
+
