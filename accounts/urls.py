@@ -10,8 +10,8 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(template_name='accounts/logout.html'),name="logout"),
     path('profile/',views.profile,name="profile"),
     path('profile/update',views.update,name="update"),
-    path('profile/cart',views.cart,name="Cart"),
-    path('profile/checkout',views.checkout,name="Checkout"),    
+    path('profile/cart',views.cart,name="cart"),
+    path('profile/checkout',views.checkout,name="checkout"),    
 ]
 
 if(settings.DEBUG):
