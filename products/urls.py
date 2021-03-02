@@ -13,8 +13,10 @@ urlpatterns = [
         'product/tags/<slug:slug>/',views.tag_detail,
         name="product-tag-list",
     ),
-    path('cart',views.cart,name="cart"),
-    path('checkout',views.checkout,name="checkout"), 
+    path('cart/',views.cart,name="cart"),
+    path('checkout/',views.checkout,name="checkout"),
+    path('update_item/',views.updateItem,name="update_item"),
+    path('process_order/',views.processOrder,name="process_order"),
 ]
 
 if(settings.DEBUG):
