@@ -34,9 +34,11 @@
                 <a class="btn btn-light mt-1 mb-1" href="{% url 'product-update' object.id %}" role="button">Update</a>
                 <a class="btn btn-light mt-1 mb-1" href="{% url 'product-delete' object.id %}" role="button">Delete</a>
                 {% else %}
-                <a class="btn btn-primary btn-margin-right" href="{% url 'cart' %}" role="button">
-                  Add to cart
-                </a>
+                <div class="text-right">
+                  <button data-product={{product.id}} data-action="add" class="btn btn-primary btn-margin-right update-cart">
+                      Add to cart
+                  </button>
+                </div>
                 {% endif %}
               </div>
               
