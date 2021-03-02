@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -15,26 +16,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for item in items %}
                     <tr>
                         <td class="col-sm-8 col-md-8">
                         <div class="media">
-                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src="http://icons.iconarchive.com/icons/custom-icon-design/flatastic-2/72/product-icon.png" style="width: 72px; height: 72px;"> </a>
+                            <a class="thumbnail pull-left" href="#"> <img class="media-object" src={{ item.product.image.url }} style="width: 72px; height: 72px;"> </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a href="#">Product name</a></h4>
-                                <h5 class="media-heading"> by <a href="#">Brand name</a></h5>
-                                <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                <h4 class="media-heading"><a href="{% url 'product-detail' item.product.id %}">{{ item.product.name }}</a></h4>
+                                <h6 class="media-heading"> by {{ item.product.owner }}</h6>
                             </div>
                         </div></td>
                         <td class="col-sm-1 col-md-2" style="text-align: center">
-                        <input type="email" class="form-control" id="exampleInputEmail1" value="3">
+                        <p class="quantity">{{ item.quantity }}</p>
+                        <div class="quantity">
+                            <img class="chg-quantity" src="{% static 'arrowup.png' %}">
+                            <img class="chg-quantity" src="{% static 'arrowdown.png' %}">
+                        </div>
                         </td>
-                        <td class="col-sm-1 col-md-2 text-center"><strong>$4.87</strong></td>
+                        <td class="col-sm-1 col-md-2 text-center"><strong>{{ item.product.price }}</strong></td>
                         <td class="col-sm-1 col-md-2 text-center"><strong>$14.61</strong></td>
                         <td class="col-sm-1 col-md-2">
                         <button type="button" class="btn btn-danger">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                         </button></td>
                     </tr>
+                    {% endfor %}
                     
                     <tr>
                         <td>   </td>

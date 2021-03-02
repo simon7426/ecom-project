@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Product
+from .models import *
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+
+from django.http import JsonResponse
 
 from taggit.models import Tag
 
@@ -54,3 +56,20 @@ def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug=slug)
     products = Product.objects.filter(tags=tag)
     return render(request, 'products/product_tag_list.html', {"products": products, "tag": tag})
+
+def cart(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order,created = Order.objects.get_or_create(customer=customer,complete=False) 
+        items = order.orderitem_set.all()
+    else:
+        items = []
+        order = {'get_cart_total':0,'get_cart_items':0}
+    context = {'items':items}
+    return render(request,'products/cart.html',context)
+
+def checkout(request):
+    return render(request,'products/checkout.html')
+
+def updateItem(request):
+    return JsonResponse("item added",safe=False)

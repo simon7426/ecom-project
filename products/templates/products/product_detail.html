@@ -28,15 +28,18 @@
             </div>
               <p class="card-text">{{ object.description }}</p>
               <p class="card-text"><small class="text-muted">{{ object.date_posted.date }}</small></p>
-              {% if object.owner == user %}
+              
               <div class="text-right">
+                {% if object.owner == user %}
+                <a class="btn btn-light mt-1 mb-1" href="{% url 'product-update' object.id %}" role="button">Update</a>
+                <a class="btn btn-light mt-1 mb-1" href="{% url 'product-delete' object.id %}" role="button">Delete</a>
+                {% else %}
                 <a class="btn btn-primary btn-margin-right" href="{% url 'cart' %}" role="button">
                   Add to cart
                 </a>
-                <a class="btn btn-light mt-1 mb-1" href="{% url 'product-update' object.id %}" role="button">Update</a>
-                <a class="btn btn-light mt-1 mb-1" href="{% url 'product-delete' object.id %}" role="button">Delete</a>
+                {% endif %}
               </div>
-              {% endif %}
+              
             </div>
           </div>
         </div>
