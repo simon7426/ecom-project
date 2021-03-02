@@ -58,9 +58,14 @@
                                 {% endfor %}
                             </p>
                         </div>
+                        <div>
+                            <small class="text-muted">{{ product.date_posted.date }}  </small>
+                        </div>
                     </div>
                     <div class="text-right">
-                        <small class="text-muted">{{ product.date_posted.date }}  </small>
+                        <a class="btn btn-primary btn-margin-right" href="{% url 'cart' %}" role="button">
+                            Add to cart
+                        </a>
                     </div>
                 </div>
             </div>
