@@ -36,8 +36,7 @@
                         <td class="col-sm-1 col-md-2 text-center"><strong>{{ item.product.price }}</strong></td>
                         <td class="col-sm-1 col-md-2 text-center"><strong>{{ item.get_total }}</strong></td>
                         <td class="col-sm-1 col-md-2">
-                        <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        <button data-product="{{item.product.id}}" data-action="delete" type="button" class="btn btn-danger btn-block chg-quantity update-cart">Remove
                         </button></td>
                     </tr>
                     {% endfor %}

@@ -99,6 +99,8 @@ def updateItem(request):
         orderitem.quantity = orderitem.quantity+1
     elif(action=='remove'):
         orderitem.quantity = orderitem.quantity-1
+    elif(action=='delete'):
+        orderitem.quantity = 0
     orderitem.save()
     
     if(orderitem.quantity<=0):
