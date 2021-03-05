@@ -16,6 +16,7 @@ def home(request):
     return render(request,'products/home.html',context)
 
 class ProductListView(ListView):
+    paginate_by = 9
     model = Product
     template_name = 'products/home.html'
     context_object_name = 'products'
