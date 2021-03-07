@@ -11,8 +11,14 @@ import datetime
 from taggit.models import Tag
 
 
-def home(request):
-    context = {'products':Product.objects,'title':"Home"}
+def recommend(request):
+    ret = []
+    pro = Product.objects.all()
+    for product in pro:
+        if(len(product.tags.all())!=0):
+            ret.append(product)
+    #print(len(ret))
+    context = {'products':ret,'title':"Home"}
     return render(request,'products/home.html',context)
 
 class ProductListView(ListView):
