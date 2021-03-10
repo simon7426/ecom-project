@@ -19,7 +19,7 @@ def recommend(request):
             ret.append(product)
     #print(len(ret))
     context = {'products':ret,'title':"Home"}
-    return render(request,'products/home.html',context)
+    return render(request,'products/recommend.html',context)
 
 class ProductListView(ListView):
     paginate_by = 9
