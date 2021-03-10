@@ -1,7 +1,7 @@
 from products.models import Product
 from django.test import SimpleTestCase
 from django.urls import reverse,resolve
-from products.views import ProductListView,ProductDetailView,cart,checkout
+from products.views import ProductListView,ProductDetailView,cart,checkout, recommend
 from django.contrib.auth.models import AnonymousUser, User
 
 class testUrls(SimpleTestCase):
@@ -25,3 +25,8 @@ class testUrls(SimpleTestCase):
         url = reverse('checkout')
         print(resolve(url))
         self.assertEquals(resolve(url).func, checkout)
+    
+    def test_recommend_url_is_resolved(self):
+        url = reverse('recommend')
+        print(resolve(url))
+        self.assertEquals(resolve(url).func, recommend)

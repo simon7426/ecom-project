@@ -19,6 +19,7 @@ class TestViews(TestCase):
             owner = self.test_user,
             price = 500,
         )
+        self.recommendation_url = reverse('recommend')
         #self.detail_url = reverse('product-detail',args=['product1'])
         
 
@@ -41,6 +42,12 @@ class TestViews(TestCase):
         response = self.client.get(reverse('product-detail',kwargs={'pk':self.product1.pk}))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,'products/product_detail.html')
+    
+    def test_recommendation_GET(self):
+        response = self.client.get(self.recommendation_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response,'products/recommend.html')
+    
 
     
 
