@@ -22,7 +22,7 @@ def recommend(request):
     return render(request,'products/recommend.html',context)
 
 class ProductListView(ListView):
-    #paginate_by = 9
+    paginate_by = 9
     model = Product
     template_name = 'products/home.html'
     context_object_name = 'products'
