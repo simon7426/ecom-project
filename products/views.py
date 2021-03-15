@@ -67,6 +67,8 @@ def recommend(request):
     similarity = {}
     for i in range(n):
         tmp1 = customer_product[cus_ids[i]]
+        if(len(tmp1)==0):
+            continue
         for j in range(i+1,n):
             tmp2 = customer_product[cus_ids[j]]
             tmpi = tmp1.intersection(tmp2)
@@ -75,29 +77,31 @@ def recommend(request):
             similarity[(cus_ids[j],cus_ids[i])] = len(tmpi)/len(tmpu)
 
     cur_customer = request.user.customer.id
+    if(len(customer_product[cur_customer])!=0):
+        ord_items = OrderItem.objects.all()
 
-    ord_items = OrderItem.objects.all()
-
-    sold_items = [ord.product.id for ord in ord_items]
-    sold_items = set(sold_items)
-    #print(len(sold_items))
-    pro_proba = []
-    for item in sold_items:
-        if(item in customer_product[cur_customer]):
-            continue
-        sm_up = 0
-        sm_down = 0
-        for other_customer in cus_ids:
-            if(cur_customer == other_customer):
+        sold_items = [ord.product.id for ord in ord_items]
+        sold_items = set(sold_items)
+        #print(len(sold_items))
+        pro_proba = []
+        for item in sold_items:
+            if(item in customer_product[cur_customer]):
                 continue
-            sm_down+=similarity[(cur_customer,other_customer)]
-            if(item in customer_product[other_customer]):
-                sm_up+=similarity[(cur_customer,other_customer)]
-        pro_proba.append((sm_up/sm_down,item))
-    pro_proba.sort(reverse=True)
-    ret2 = []
-    for x in pro_proba:
-        ret2.append(x[1])
+            sm_up = 0
+            sm_down = 0
+            for other_customer in cus_ids:
+                if(cur_customer == other_customer):
+                    continue
+                sm_down+=similarity[(cur_customer,other_customer)]
+                if(item in customer_product[other_customer]):
+                    sm_up+=similarity[(cur_customer,other_customer)]
+            pro_proba.append((sm_up/sm_down,item))
+        pro_proba.sort(reverse=True)
+        ret2 = []
+        for x in pro_proba:
+            ret2.append(x[1])
+    else:
+        ret2=[]
 
     vote = {}
     mark = max(len(ret2),len(ret1))
