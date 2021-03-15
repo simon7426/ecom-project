@@ -10,7 +10,6 @@ import datetime
 
 from taggit.models import Tag
 from apyori import apriori
-from .recommendation import recommend
 
 
 def recommend(request):
