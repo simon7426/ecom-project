@@ -33,7 +33,6 @@ Template is written with django 2.2+ and python 3 in mind.
 Can be used a start up point for an E-commerce website
       
 
-# {{ project_name|title }}
 
 # Getting Started
 
