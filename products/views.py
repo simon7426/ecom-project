@@ -92,9 +92,10 @@ def recommend(request):
             for other_customer in cus_ids:
                 if(cur_customer == other_customer):
                     continue
-                sm_down+=similarity[(cur_customer,other_customer)]
-                if(item in customer_product[other_customer]):
-                    sm_up+=similarity[(cur_customer,other_customer)]
+                if((cur_customer,other_customer) in similarity):
+                    sm_down+=similarity[(cur_customer,other_customer)]
+                    if(item in customer_product[other_customer]):
+                        sm_up+=similarity[(cur_customer,other_customer)]
             pro_proba.append((sm_up/sm_down,item))
         pro_proba.sort(reverse=True)
         ret2 = []
